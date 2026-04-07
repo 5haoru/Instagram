@@ -1,0 +1,10 @@
+[
+  { "id": "music_1", "title": "Blinding Lights", "artist": "The Weeknd", "thumbnailUrl": "image/1.jpeg" },
+  { "id": "music_2", "title": "Levitating", "artist": "Dua Lipa", "thumbnailUrl": "image/2.jpeg" },
+  { "id": "music_3", "title": "Stay", "artist": "The Kid LAROI & Justin Bieber", "thumbnailUrl": "image/3.jpeg" },
+  { "id": "music_4", "title": "Peaches", "artist": "Justin Bieber", "thumbnailUrl": "image/4.jpeg" },
+  { "id": "music_5", "title": "Save Your Tears", "artist": "The Weeknd", "thumbnailUrl": "image/5.jpeg" },
+  { "id": "music_6", "title": "Montero", "artist": "Lil Nas X", "thumbnailUrl": "image/6.jpeg" },
+  { "id": "music_7", "title": "Kiss Me More", "artist": "Doja Cat ft. SZA", "thumbnailUrl": "image/7.jpeg" },
+  { "id": "music_8", "title": "Good 4 U", "artist": "Olivia Rodrigo", "thumbnailUrl": "image/8.jpeg" }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "reelId": "reel_1",
+    "userId": "user_sangram",
+    "videoUrl": "reels/1.mp4",
+    "caption": "Morning workout routine 💪 Follow for more fitness tips! #fitness #gym #workout",
+    "audioName": "Original audio - sangramsinghdeshmukh",
+    "likedBy": ["user_self", "user_tanu", "user_deepak"],
+    "savedBy": ["user_self"],
+    "comments": [
+      {
+        "commentId": "rcomment_1",
+        "postId": "reel_1",
+        "userId": "user_deepak",
+        "text": "Incredible form! 🔥",
+        "timestamp": "3 hours ago",
+        "likedBy": ["user_sangram"]
+      }
+    ],
+    "shareCount": 234
+  },
+  {
+    "reelId": "reel_2",
+    "userId": "user_anushka",
+    "videoUrl": "reels/2.mp4",
+    "caption": "Behind the scenes 🎬✨ Can you guess the movie? #bollywood #bts",
+    "audioName": "Trending Song - Bollywood Hits",
+    "likedBy": ["user_self", "user_naina", "user_tanu", "user_yashi", "user_deepak"],
+    "savedBy": ["user_naina", "user_tanu"],
+    "comments": [
+      {
+        "commentId": "rcomment_2",
+        "postId": "reel_2",
+        "userId": "user_naina",
+        "text": "So excited for this! 😍",
+        "timestamp": "1 hour ago",
+        "likedBy": ["user_anushka"]
+      },
+      {
+        "commentId": "rcomment_3",
+        "postId": "reel_2",
+        "userId": "user_tanu",
+        "text": "Queen! 👑",
+        "timestamp": "45 minutes ago",
+        "likedBy": []
+      }
+    ],
+    "shareCount": 12500
+  },
+  {
+    "reelId": "reel_3",
+    "userId": "user_tanu",
+    "videoUrl": "reels/3.mp4",
+    "caption": "New dance trend 💃🎵 Try this one! #dance #trending #viral",
+    "audioName": "Viral Dance Beat - DJ Remix",
+    "likedBy": ["user_naina", "user_yashi", "user_sakshi"],
+    "savedBy": ["user_sakshi"],
+    "comments": [
+      {
+        "commentId": "rcomment_4",
+        "postId": "reel_3",
+        "userId": "user_yashi",
+        "text": "Nailed it! 🔥💃",
+        "timestamp": "2 hours ago",
+        "likedBy": ["user_tanu"]
+      }
+    ],
+    "shareCount": 567
+  }
+]

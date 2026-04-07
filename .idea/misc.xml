@@ -1,0 +1,10 @@
+<project version="4">
+  <component name="Black">
+    <option name="sdkName" value="whr" />
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="whr" project-jdk-type="Python SDK" />
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

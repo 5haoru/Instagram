@@ -1,0 +1,8 @@
+[
+  { "id": "loc_1", "name": "Central Park", "category": "Park" },
+  { "id": "loc_2", "name": "Times Square", "category": "Landmark" },
+  { "id": "loc_3", "name": "Brooklyn Bridge", "category": "Landmark" },
+  { "id": "loc_4", "name": "Golden Gate Bridge", "category": "Landmark" },
+  { "id": "loc_5", "name": "Hollywood Walk of Fame", "category": "Attraction" },
+  { "id": "loc_6", "name": "The Metropolitan Museum of Art", "category": "Museum" }
+]

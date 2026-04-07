@@ -1,0 +1,44 @@
+[
+  {
+    "storyId": "story_1",
+    "userId": "user_anushka",
+    "imageUrl": "story_anushka",
+    "timestamp": "2 hours ago",
+    "viewedBy": ["user_naina", "user_deepak"]
+  },
+  {
+    "storyId": "story_2",
+    "userId": "user_naina",
+    "imageUrl": "story_naina",
+    "timestamp": "4 hours ago",
+    "viewedBy": ["user_self"]
+  },
+  {
+    "storyId": "story_3",
+    "userId": "user_tanu",
+    "imageUrl": "story_tanu",
+    "timestamp": "1 hour ago",
+    "viewedBy": []
+  },
+  {
+    "storyId": "story_4",
+    "userId": "user_yashi",
+    "imageUrl": "story_yashi",
+    "timestamp": "30 minutes ago",
+    "viewedBy": []
+  },
+  {
+    "storyId": "story_5",
+    "userId": "user_sakshi",
+    "imageUrl": "story_sakshi",
+    "timestamp": "5 hours ago",
+    "viewedBy": ["user_self", "user_yashi"]
+  },
+  {
+    "storyId": "story_6",
+    "userId": "user_deepak",
+    "imageUrl": "story_deepak",
+    "timestamp": "3 hours ago",
+    "viewedBy": []
+  }
+]

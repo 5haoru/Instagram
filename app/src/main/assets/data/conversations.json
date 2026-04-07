@@ -1,0 +1,110 @@
+[
+  {
+    "conversationId": "conv_1",
+    "participantIds": ["user_self", "user_anushka"],
+    "messages": [
+      {
+        "messageId": "msg_1",
+        "conversationId": "conv_1",
+        "senderId": "user_anushka",
+        "text": "Hey! Thanks for the follow 😊",
+        "timestamp": "2 days ago",
+        "isRead": true
+      },
+      {
+        "messageId": "msg_2",
+        "conversationId": "conv_1",
+        "senderId": "user_self",
+        "text": "Love your content! Big fan 🙌",
+        "timestamp": "2 days ago",
+        "isRead": true
+      },
+      {
+        "messageId": "msg_3",
+        "conversationId": "conv_1",
+        "senderId": "user_anushka",
+        "text": "That's so sweet, thank you! 💕",
+        "timestamp": "1 day ago",
+        "isRead": true
+      }
+    ],
+    "unreadCount": 0
+  },
+  {
+    "conversationId": "conv_2",
+    "participantIds": ["user_self", "user_naina"],
+    "messages": [
+      {
+        "messageId": "msg_4",
+        "conversationId": "conv_2",
+        "senderId": "user_naina",
+        "text": "Are you coming to the art exhibition this weekend?",
+        "timestamp": "3 hours ago",
+        "isRead": false
+      },
+      {
+        "messageId": "msg_5",
+        "conversationId": "conv_2",
+        "senderId": "user_self",
+        "text": "Yes! What time?",
+        "timestamp": "3 hours ago",
+        "isRead": true
+      },
+      {
+        "messageId": "msg_6",
+        "conversationId": "conv_2",
+        "senderId": "user_naina",
+        "text": "It starts at 5pm. I'll send you the location",
+        "timestamp": "2 hours ago",
+        "isRead": false
+      }
+    ],
+    "unreadCount": 1
+  },
+  {
+    "conversationId": "conv_3",
+    "participantIds": ["user_self", "user_deepak"],
+    "messages": [
+      {
+        "messageId": "msg_7",
+        "conversationId": "conv_3",
+        "senderId": "user_deepak",
+        "text": "Bro check this out 😂",
+        "timestamp": "1 hour ago",
+        "isRead": false
+      },
+      {
+        "messageId": "msg_8",
+        "conversationId": "conv_3",
+        "senderId": "user_deepak",
+        "text": "This meme is too good 🤣",
+        "timestamp": "1 hour ago",
+        "isRead": false
+      }
+    ],
+    "unreadCount": 2
+  },
+  {
+    "conversationId": "conv_4",
+    "participantIds": ["user_self", "user_yashi"],
+    "messages": [
+      {
+        "messageId": "msg_9",
+        "conversationId": "conv_4",
+        "senderId": "user_self",
+        "text": "Your travel pics are amazing!",
+        "timestamp": "1 day ago",
+        "isRead": true
+      },
+      {
+        "messageId": "msg_10",
+        "conversationId": "conv_4",
+        "senderId": "user_yashi",
+        "text": "Thanks! You should join next trip 🏔️",
+        "timestamp": "1 day ago",
+        "isRead": true
+      }
+    ],
+    "unreadCount": 0
+  }
+]
