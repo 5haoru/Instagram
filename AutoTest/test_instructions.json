@@ -1,0 +1,470 @@
+{
+  "app": "Instagram Simulator",
+  "total_tests": 40,
+  "difficulty_levels": {
+    "easy": "1-10: Single-step operations, basic navigation",
+    "medium": "11-20: Two-step operations, simple interactions",
+    "hard": "21-30: Multi-step operations, complex interactions",
+    "expert": "31-40: Complex workflows, conditional logic, multi-screen flows"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "instruction": "Click the search tab in the bottom navigation bar",
+      "difficulty": "easy",
+      "category": "navigation",
+      "expected_result": "Search screen is displayed with search bar and explore grid",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "search"
+      }
+    },
+    {
+      "id": 2,
+      "instruction": "Click the Reels tab in the bottom navigation bar",
+      "difficulty": "easy",
+      "category": "navigation",
+      "expected_result": "Reels screen is displayed with full-screen video",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "reels"
+      }
+    },
+    {
+      "id": 3,
+      "instruction": "Click the Messages tab in the bottom navigation bar",
+      "difficulty": "easy",
+      "category": "navigation",
+      "expected_result": "Messages screen is displayed with conversation list",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "messages"
+      }
+    },
+    {
+      "id": 4,
+      "instruction": "Click the Profile tab in the bottom navigation bar",
+      "difficulty": "easy",
+      "category": "navigation",
+      "expected_result": "Profile screen is displayed with user info and posts grid",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "profile"
+      }
+    },
+    {
+      "id": 5,
+      "instruction": "Like the first post in the home feed",
+      "difficulty": "easy",
+      "category": "interaction",
+      "expected_result": "Heart icon turns red, like count increases by 1",
+      "verification": {
+        "type": "element_state",
+        "target": "like_button_post_1",
+        "expected_state": "liked"
+      }
+    },
+    {
+      "id": 6,
+      "instruction": "Save the first post in the home feed",
+      "difficulty": "easy",
+      "category": "interaction",
+      "expected_result": "Bookmark icon becomes filled, snackbar shows 'Saved'",
+      "verification": {
+        "type": "element_state",
+        "target": "bookmark_button_post_1",
+        "expected_state": "saved"
+      }
+    },
+    {
+      "id": 7,
+      "instruction": "Click the notification icon (heart) on the home screen top bar",
+      "difficulty": "easy",
+      "category": "navigation",
+      "expected_result": "Notifications screen is displayed",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "notifications"
+      }
+    },
+    {
+      "id": 8,
+      "instruction": "Click on the home tab to return to the home feed",
+      "difficulty": "easy",
+      "category": "navigation",
+      "expected_result": "Home screen with stories bar and post feed is displayed",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "home"
+      }
+    },
+    {
+      "id": 9,
+      "instruction": "Click the new post icon (plus icon) on the home screen top bar",
+      "difficulty": "easy",
+      "category": "navigation",
+      "expected_result": "New post gallery screen is displayed with image grid",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "new_post_gallery"
+      }
+    },
+    {
+      "id": 10,
+      "instruction": "Swipe up on the Reels screen to view the next reel",
+      "difficulty": "easy",
+      "category": "gesture",
+      "expected_result": "Next reel video is displayed and plays automatically",
+      "verification": {
+        "type": "reel_changed",
+        "direction": "next"
+      }
+    },
+    {
+      "id": 11,
+      "instruction": "Navigate to the Profile tab and click 'Edit profile' button",
+      "difficulty": "medium",
+      "category": "navigation",
+      "expected_result": "Edit profile screen is displayed with editable fields",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "edit_profile"
+      }
+    },
+    {
+      "id": 12,
+      "instruction": "Open the search tab and type 'john' in the search bar",
+      "difficulty": "medium",
+      "category": "search",
+      "expected_result": "Search results show users matching 'john'",
+      "verification": {
+        "type": "search_results",
+        "query": "john",
+        "has_results": true
+      }
+    },
+    {
+      "id": 13,
+      "instruction": "Click on the first conversation in the Messages screen",
+      "difficulty": "medium",
+      "category": "navigation",
+      "expected_result": "Chat detail screen is displayed with message history",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "chat_detail"
+      }
+    },
+    {
+      "id": 14,
+      "instruction": "Click the comment icon on the first post and view comments",
+      "difficulty": "medium",
+      "category": "interaction",
+      "expected_result": "Comment bottom sheet is displayed with comment list",
+      "verification": {
+        "type": "bottom_sheet",
+        "sheet_type": "comments"
+      }
+    },
+    {
+      "id": 15,
+      "instruction": "Click the share icon on the first post in the home feed",
+      "difficulty": "medium",
+      "category": "interaction",
+      "expected_result": "Share bottom sheet is displayed with user avatars and share options",
+      "verification": {
+        "type": "bottom_sheet",
+        "sheet_type": "share"
+      }
+    },
+    {
+      "id": 16,
+      "instruction": "Navigate to Profile and click 'Share profile' button",
+      "difficulty": "medium",
+      "category": "navigation",
+      "expected_result": "Share profile screen is displayed with QR code card",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "share_profile"
+      }
+    },
+    {
+      "id": 17,
+      "instruction": "Click the three-dot menu on the first post and select 'Not interested'",
+      "difficulty": "medium",
+      "category": "interaction",
+      "expected_result": "Menu bottom sheet opens, then dismisses after selecting 'Not interested'",
+      "verification": {
+        "type": "menu_action",
+        "action": "not_interested"
+      }
+    },
+    {
+      "id": 18,
+      "instruction": "Navigate to Profile and click on the Followers count",
+      "difficulty": "medium",
+      "category": "navigation",
+      "expected_result": "Followers/Following screen is displayed with Followers tab selected",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "followers_following",
+        "tab": "followers"
+      }
+    },
+    {
+      "id": 19,
+      "instruction": "Like a reel on the Reels screen",
+      "difficulty": "medium",
+      "category": "interaction",
+      "expected_result": "Heart icon turns red and like count increases",
+      "verification": {
+        "type": "element_state",
+        "target": "reel_like_button",
+        "expected_state": "liked"
+      }
+    },
+    {
+      "id": 20,
+      "instruction": "Navigate to Profile, click the settings icon (hamburger menu), then go to 'Saved'",
+      "difficulty": "medium",
+      "category": "navigation",
+      "expected_result": "Saved screen is displayed with All Posts collection",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "saved"
+      }
+    },
+    {
+      "id": 21,
+      "instruction": "Open the comment section on the first post, type 'Nice photo!' and post the comment",
+      "difficulty": "hard",
+      "category": "content_creation",
+      "expected_result": "New comment 'Nice photo!' appears in the comment list",
+      "verification": {
+        "type": "comment_added",
+        "text": "Nice photo!"
+      }
+    },
+    {
+      "id": 22,
+      "instruction": "Open a chat conversation and send the message 'Hello, how are you?'",
+      "difficulty": "hard",
+      "category": "content_creation",
+      "expected_result": "Message 'Hello, how are you?' appears as a sent message in the chat",
+      "verification": {
+        "type": "message_sent",
+        "text": "Hello, how are you?"
+      }
+    },
+    {
+      "id": 23,
+      "instruction": "Navigate to Settings > Account Privacy and toggle the Private account switch on",
+      "difficulty": "hard",
+      "category": "settings",
+      "expected_result": "Private account toggle is turned on",
+      "verification": {
+        "type": "setting_toggled",
+        "setting": "private_account",
+        "state": true
+      }
+    },
+    {
+      "id": 24,
+      "instruction": "Navigate to Settings > Time Management and enable the daily time limit, then set it to 60 minutes",
+      "difficulty": "hard",
+      "category": "settings",
+      "expected_result": "Daily time limit toggle is on and slider shows 60 minutes",
+      "verification": {
+        "type": "setting_value",
+        "setting": "daily_time_limit",
+        "value": 60
+      }
+    },
+    {
+      "id": 25,
+      "instruction": "Navigate to Profile, click Edit profile, and change the display name to 'Test User'",
+      "difficulty": "hard",
+      "category": "profile_edit",
+      "expected_result": "Name field shows 'Test User'",
+      "verification": {
+        "type": "field_value",
+        "field": "name",
+        "value": "Test User"
+      }
+    },
+    {
+      "id": 26,
+      "instruction": "Click 'Follow' on a user in the home feed, then navigate to the Profile tab and check the Following count increased",
+      "difficulty": "hard",
+      "category": "social",
+      "expected_result": "Following count on profile increases by 1",
+      "verification": {
+        "type": "count_change",
+        "counter": "following",
+        "change": 1
+      }
+    },
+    {
+      "id": 27,
+      "instruction": "Navigate to Settings > Blocked, click the '+' icon, search for a user and block them",
+      "difficulty": "hard",
+      "category": "settings",
+      "expected_result": "User appears in the blocked users list",
+      "verification": {
+        "type": "user_in_list",
+        "list": "blocked"
+      }
+    },
+    {
+      "id": 28,
+      "instruction": "Navigate to Settings > Close Friends, search for a user and add them to close friends",
+      "difficulty": "hard",
+      "category": "settings",
+      "expected_result": "User's button changes from 'Add' to 'Remove' indicating they are now a close friend",
+      "verification": {
+        "type": "user_in_list",
+        "list": "close_friends"
+      }
+    },
+    {
+      "id": 29,
+      "instruction": "Navigate to Profile > Followers, then remove the first follower from the list",
+      "difficulty": "hard",
+      "category": "social",
+      "expected_result": "First follower is removed, follower count decreases by 1",
+      "verification": {
+        "type": "count_change",
+        "counter": "followers",
+        "change": -1
+      }
+    },
+    {
+      "id": 30,
+      "instruction": "Navigate to Settings > Saved, click the '+' icon and create a new collection named 'Favorites'",
+      "difficulty": "hard",
+      "category": "content_creation",
+      "expected_result": "New collection 'Favorites' appears in the collections list",
+      "verification": {
+        "type": "collection_created",
+        "name": "Favorites"
+      }
+    },
+    {
+      "id": 31,
+      "instruction": "Create a new post: select the second image from gallery, write caption 'Beautiful sunset #nature', add the location 'Central Park', then share the post",
+      "difficulty": "expert",
+      "category": "content_creation",
+      "expected_result": "Post is published with the selected image, caption, and location. Snackbar shows 'Post shared!'",
+      "verification": {
+        "type": "post_created",
+        "has_caption": true,
+        "has_location": true
+      }
+    },
+    {
+      "id": 32,
+      "instruction": "Create a new post: select any image, write a caption, add a poll with question 'Which is better?' and options 'Option A' and 'Option B', then share the post",
+      "difficulty": "expert",
+      "category": "content_creation",
+      "expected_result": "Post is published with poll data configured",
+      "verification": {
+        "type": "post_created",
+        "has_poll": true
+      }
+    },
+    {
+      "id": 33,
+      "instruction": "Create a new post: select any image, write a caption, add music by searching for a track, set the audience to 'Close Friends', then share the post",
+      "difficulty": "expert",
+      "category": "content_creation",
+      "expected_result": "Post is published with music and audience set to Close Friends",
+      "verification": {
+        "type": "post_created",
+        "has_music": true,
+        "audience": "close_friends"
+      }
+    },
+    {
+      "id": 34,
+      "instruction": "Like the first post, then unlike it, and verify the heart icon returns to its original state",
+      "difficulty": "expert",
+      "category": "interaction",
+      "expected_result": "Heart icon is unfilled (not red), like count returns to original value",
+      "verification": {
+        "type": "element_state",
+        "target": "like_button_post_1",
+        "expected_state": "not_liked"
+      }
+    },
+    {
+      "id": 35,
+      "instruction": "Save a post from the home feed, then navigate to Settings > Saved and verify the post appears in 'All Posts'",
+      "difficulty": "expert",
+      "category": "cross_screen",
+      "expected_result": "The saved post image is visible in the Saved > All Posts grid",
+      "verification": {
+        "type": "post_in_saved"
+      }
+    },
+    {
+      "id": 36,
+      "instruction": "Follow a user from their profile page, then navigate to your own Profile > Following tab and verify they appear in the following list",
+      "difficulty": "expert",
+      "category": "cross_screen",
+      "expected_result": "The followed user appears in the Following list with a 'Following' button",
+      "verification": {
+        "type": "user_in_list",
+        "list": "following"
+      }
+    },
+    {
+      "id": 37,
+      "instruction": "Create a new post with a caption, enable 'Hide like and view counts' and 'Turn off commenting' in More Options, toggle sharing to Facebook in 'Also share to', then publish the post",
+      "difficulty": "expert",
+      "category": "content_creation",
+      "expected_result": "Post is published with hide likes, commenting off, and Facebook sharing enabled",
+      "verification": {
+        "type": "post_created",
+        "hide_likes": true,
+        "commenting_off": true,
+        "share_facebook": true
+      }
+    },
+    {
+      "id": 38,
+      "instruction": "Navigate to Profile > Edit profile, change the Name to 'New Name', change the Bio to 'Hello World', change the Username to 'newuser', then close the edit screen and verify the profile shows the updated information",
+      "difficulty": "expert",
+      "category": "profile_edit",
+      "expected_result": "Profile screen shows updated name 'New Name', bio 'Hello World', and username 'newuser'",
+      "verification": {
+        "type": "multi_field_check",
+        "fields": {
+          "name": "New Name",
+          "bio": "Hello World",
+          "username": "newuser"
+        }
+      }
+    },
+    {
+      "id": 39,
+      "instruction": "Block a user from Settings > Blocked, then navigate to that user's profile from the home feed and verify their profile shows as private/restricted. Finally, unblock them from Settings > Blocked",
+      "difficulty": "expert",
+      "category": "complex_workflow",
+      "expected_result": "User is blocked, their content is restricted, then user is successfully unblocked",
+      "verification": {
+        "type": "workflow_complete",
+        "steps": ["block_user", "verify_restricted", "unblock_user"]
+      }
+    },
+    {
+      "id": 40,
+      "instruction": "Complete the following sequence: 1) Like and save the first post, 2) Open comments and add a comment 'Great post!', 3) Navigate to the post author's profile by clicking their username, 4) Follow the author, 5) Go back to home and verify the Follow button changed to 'Following'",
+      "difficulty": "expert",
+      "category": "complex_workflow",
+      "expected_result": "Post is liked and saved, comment is added, author is followed, and home feed shows 'Following' status",
+      "verification": {
+        "type": "workflow_complete",
+        "steps": ["like_post", "save_post", "add_comment", "view_profile", "follow_user", "verify_following"]
+      }
+    }
+  ]
+}

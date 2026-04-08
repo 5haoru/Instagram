@@ -1,0 +1,470 @@
+{
+  "app": "Instagram模拟器",
+  "total_tests": 40,
+  "difficulty_levels": {
+    "easy": "1-10: 单步操作，基础导航",
+    "medium": "11-20: 两步操作，简单交互",
+    "hard": "21-30: 多步操作，复杂交互",
+    "expert": "31-40: 复杂工作流，条件逻辑，跨页面流程"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "instruction": "点击底部导航栏的搜索标签",
+      "difficulty": "easy",
+      "category": "navigation",
+      "expected_result": "显示搜索页面，包含搜索栏和探索图片网格",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "search"
+      }
+    },
+    {
+      "id": 2,
+      "instruction": "点击底部导航栏的Reels标签",
+      "difficulty": "easy",
+      "category": "navigation",
+      "expected_result": "显示Reels页面，展示全屏短视频",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "reels"
+      }
+    },
+    {
+      "id": 3,
+      "instruction": "点击底部导航栏的消息标签",
+      "difficulty": "easy",
+      "category": "navigation",
+      "expected_result": "显示消息页面，展示会话列表",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "messages"
+      }
+    },
+    {
+      "id": 4,
+      "instruction": "点击底部导航栏的个人主页标签",
+      "difficulty": "easy",
+      "category": "navigation",
+      "expected_result": "显示个人主页，包含用户信息和帖子网格",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "profile"
+      }
+    },
+    {
+      "id": 5,
+      "instruction": "给首页动态中的第一条帖子点赞",
+      "difficulty": "easy",
+      "category": "interaction",
+      "expected_result": "爱心图标变为红色，点赞数增加1",
+      "verification": {
+        "type": "element_state",
+        "target": "like_button_post_1",
+        "expected_state": "liked"
+      }
+    },
+    {
+      "id": 6,
+      "instruction": "收藏首页动态中的第一条帖子",
+      "difficulty": "easy",
+      "category": "interaction",
+      "expected_result": "书签图标变为实心，弹出提示'Saved'",
+      "verification": {
+        "type": "element_state",
+        "target": "bookmark_button_post_1",
+        "expected_state": "saved"
+      }
+    },
+    {
+      "id": 7,
+      "instruction": "点击首页顶部栏的通知图标（爱心图标）",
+      "difficulty": "easy",
+      "category": "navigation",
+      "expected_result": "显示通知页面",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "notifications"
+      }
+    },
+    {
+      "id": 8,
+      "instruction": "点击底部导航栏的首页标签，返回首页动态",
+      "difficulty": "easy",
+      "category": "navigation",
+      "expected_result": "显示首页，包含故事栏和帖子动态流",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "home"
+      }
+    },
+    {
+      "id": 9,
+      "instruction": "点击首页顶部栏的新建帖子图标（加号图标）",
+      "difficulty": "easy",
+      "category": "navigation",
+      "expected_result": "显示新建帖子的相册选择页面，包含图片网格",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "new_post_gallery"
+      }
+    },
+    {
+      "id": 10,
+      "instruction": "在Reels页面上向上滑动，查看下一个短视频",
+      "difficulty": "easy",
+      "category": "gesture",
+      "expected_result": "切换到下一个短视频并自动播放",
+      "verification": {
+        "type": "reel_changed",
+        "direction": "next"
+      }
+    },
+    {
+      "id": 11,
+      "instruction": "进入个人主页标签，然后点击'Edit profile'按钮",
+      "difficulty": "medium",
+      "category": "navigation",
+      "expected_result": "显示编辑资料页面，包含可编辑的个人信息字段",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "edit_profile"
+      }
+    },
+    {
+      "id": 12,
+      "instruction": "打开搜索标签，在搜索栏中输入'john'",
+      "difficulty": "medium",
+      "category": "search",
+      "expected_result": "搜索结果显示与'john'匹配的用户列表",
+      "verification": {
+        "type": "search_results",
+        "query": "john",
+        "has_results": true
+      }
+    },
+    {
+      "id": 13,
+      "instruction": "进入消息页面，点击第一个会话",
+      "difficulty": "medium",
+      "category": "navigation",
+      "expected_result": "显示聊天详情页面，展示消息历史记录",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "chat_detail"
+      }
+    },
+    {
+      "id": 14,
+      "instruction": "点击第一条帖子的评论图标，查看评论",
+      "difficulty": "medium",
+      "category": "interaction",
+      "expected_result": "弹出评论底部弹窗，显示评论列表",
+      "verification": {
+        "type": "bottom_sheet",
+        "sheet_type": "comments"
+      }
+    },
+    {
+      "id": 15,
+      "instruction": "点击首页动态中第一条帖子的分享图标",
+      "difficulty": "medium",
+      "category": "interaction",
+      "expected_result": "弹出分享底部弹窗，显示用户头像和分享选项",
+      "verification": {
+        "type": "bottom_sheet",
+        "sheet_type": "share"
+      }
+    },
+    {
+      "id": 16,
+      "instruction": "进入个人主页，点击'Share profile'按钮",
+      "difficulty": "medium",
+      "category": "navigation",
+      "expected_result": "显示分享个人资料页面，包含二维码卡片",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "share_profile"
+      }
+    },
+    {
+      "id": 17,
+      "instruction": "点击第一条帖子的三点菜单，然后选择'Not interested'",
+      "difficulty": "medium",
+      "category": "interaction",
+      "expected_result": "菜单底部弹窗打开，选择后自动关闭",
+      "verification": {
+        "type": "menu_action",
+        "action": "not_interested"
+      }
+    },
+    {
+      "id": 18,
+      "instruction": "进入个人主页，点击粉丝数量",
+      "difficulty": "medium",
+      "category": "navigation",
+      "expected_result": "显示粉丝/关注列表页面，默认选中粉丝标签",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "followers_following",
+        "tab": "followers"
+      }
+    },
+    {
+      "id": 19,
+      "instruction": "在Reels页面给当前短视频点赞",
+      "difficulty": "medium",
+      "category": "interaction",
+      "expected_result": "爱心图标变为红色，点赞数增加",
+      "verification": {
+        "type": "element_state",
+        "target": "reel_like_button",
+        "expected_state": "liked"
+      }
+    },
+    {
+      "id": 20,
+      "instruction": "进入个人主页，点击设置图标（汉堡菜单），然后进入'Saved'",
+      "difficulty": "medium",
+      "category": "navigation",
+      "expected_result": "显示收藏页面，包含'All Posts'收藏夹",
+      "verification": {
+        "type": "screen_check",
+        "target_screen": "saved"
+      }
+    },
+    {
+      "id": 21,
+      "instruction": "打开第一条帖子的评论区，输入'Nice photo!'并发布评论",
+      "difficulty": "hard",
+      "category": "content_creation",
+      "expected_result": "新评论'Nice photo!'出现在评论列表中",
+      "verification": {
+        "type": "comment_added",
+        "text": "Nice photo!"
+      }
+    },
+    {
+      "id": 22,
+      "instruction": "打开一个聊天会话，发送消息'Hello, how are you?'",
+      "difficulty": "hard",
+      "category": "content_creation",
+      "expected_result": "消息'Hello, how are you?'作为已发送消息出现在聊天中",
+      "verification": {
+        "type": "message_sent",
+        "text": "Hello, how are you?"
+      }
+    },
+    {
+      "id": 23,
+      "instruction": "依次进入 设置 > Account Privacy，然后打开'Private account'开关",
+      "difficulty": "hard",
+      "category": "settings",
+      "expected_result": "私密账户开关已开启",
+      "verification": {
+        "type": "setting_toggled",
+        "setting": "private_account",
+        "state": true
+      }
+    },
+    {
+      "id": 24,
+      "instruction": "依次进入 设置 > Time Management，开启每日使用时间限制，然后将时间设为60分钟",
+      "difficulty": "hard",
+      "category": "settings",
+      "expected_result": "每日时间限制开关已开启，滑块显示60分钟",
+      "verification": {
+        "type": "setting_value",
+        "setting": "daily_time_limit",
+        "value": 60
+      }
+    },
+    {
+      "id": 25,
+      "instruction": "进入个人主页，点击编辑资料，将显示名称修改为'Test User'",
+      "difficulty": "hard",
+      "category": "profile_edit",
+      "expected_result": "名称字段显示'Test User'",
+      "verification": {
+        "type": "field_value",
+        "field": "name",
+        "value": "Test User"
+      }
+    },
+    {
+      "id": 26,
+      "instruction": "在首页动态中点击某用户的'Follow'按钮关注他，然后进入个人主页查看关注数是否增加",
+      "difficulty": "hard",
+      "category": "social",
+      "expected_result": "个人主页的关注数增加1",
+      "verification": {
+        "type": "count_change",
+        "counter": "following",
+        "change": 1
+      }
+    },
+    {
+      "id": 27,
+      "instruction": "依次进入 设置 > Blocked，点击'+'图标，搜索一个用户并将其拉黑",
+      "difficulty": "hard",
+      "category": "settings",
+      "expected_result": "被拉黑的用户出现在黑名单列表中",
+      "verification": {
+        "type": "user_in_list",
+        "list": "blocked"
+      }
+    },
+    {
+      "id": 28,
+      "instruction": "依次进入 设置 > Close Friends，搜索一个用户并将其添加为亲密好友",
+      "difficulty": "hard",
+      "category": "settings",
+      "expected_result": "该用户的按钮从'Add'变为'Remove'，表示已添加为亲密好友",
+      "verification": {
+        "type": "user_in_list",
+        "list": "close_friends"
+      }
+    },
+    {
+      "id": 29,
+      "instruction": "进入个人主页的粉丝列表，移除第一个粉丝",
+      "difficulty": "hard",
+      "category": "social",
+      "expected_result": "第一个粉丝被移除，粉丝数减少1",
+      "verification": {
+        "type": "count_change",
+        "counter": "followers",
+        "change": -1
+      }
+    },
+    {
+      "id": 30,
+      "instruction": "依次进入 设置 > Saved，点击'+'图标，创建一个名为'Favorites'的新收藏夹",
+      "difficulty": "hard",
+      "category": "content_creation",
+      "expected_result": "新收藏夹'Favorites'出现在收藏夹列表中",
+      "verification": {
+        "type": "collection_created",
+        "name": "Favorites"
+      }
+    },
+    {
+      "id": 31,
+      "instruction": "创建一条新帖子：从相册选择第二张图片，输入标题'Beautiful sunset #nature'，添加位置'Central Park'，然后发布帖子",
+      "difficulty": "expert",
+      "category": "content_creation",
+      "expected_result": "帖子成功发布，包含所选图片、标题和位置信息，弹出提示'Post shared!'",
+      "verification": {
+        "type": "post_created",
+        "has_caption": true,
+        "has_location": true
+      }
+    },
+    {
+      "id": 32,
+      "instruction": "创建一条新帖子：选择任意图片，输入标题，添加一个投票，投票问题为'Which is better?'，选项为'Option A'和'Option B'，然后发布帖子",
+      "difficulty": "expert",
+      "category": "content_creation",
+      "expected_result": "帖子成功发布，包含投票数据",
+      "verification": {
+        "type": "post_created",
+        "has_poll": true
+      }
+    },
+    {
+      "id": 33,
+      "instruction": "创建一条新帖子：选择任意图片，输入标题，通过搜索添加一首音乐，将受众设置为'Close Friends'，然后发布帖子",
+      "difficulty": "expert",
+      "category": "content_creation",
+      "expected_result": "帖子成功发布，包含音乐且受众设置为亲密好友",
+      "verification": {
+        "type": "post_created",
+        "has_music": true,
+        "audience": "close_friends"
+      }
+    },
+    {
+      "id": 34,
+      "instruction": "给第一条帖子点赞，然后取消点赞，验证爱心图标恢复到原始状态",
+      "difficulty": "expert",
+      "category": "interaction",
+      "expected_result": "爱心图标恢复为未填充状态（非红色），点赞数恢复到原始值",
+      "verification": {
+        "type": "element_state",
+        "target": "like_button_post_1",
+        "expected_state": "not_liked"
+      }
+    },
+    {
+      "id": 35,
+      "instruction": "在首页动态中收藏一条帖子，然后进入 设置 > Saved，验证该帖子出现在'All Posts'中",
+      "difficulty": "expert",
+      "category": "cross_screen",
+      "expected_result": "被收藏的帖子图片出现在 Saved > All Posts 的图片网格中",
+      "verification": {
+        "type": "post_in_saved"
+      }
+    },
+    {
+      "id": 36,
+      "instruction": "从某用户的个人主页关注该用户，然后进入自己的 个人主页 > 关注列表 标签，验证该用户出现在关注列表中",
+      "difficulty": "expert",
+      "category": "cross_screen",
+      "expected_result": "被关注的用户出现在关注列表中，显示'Following'按钮",
+      "verification": {
+        "type": "user_in_list",
+        "list": "following"
+      }
+    },
+    {
+      "id": 37,
+      "instruction": "创建一条新帖子，输入标题，在'More options'中开启'Hide like and view counts'和'Turn off commenting'，在'Also share to'中开启Facebook分享，然后发布帖子",
+      "difficulty": "expert",
+      "category": "content_creation",
+      "expected_result": "帖子成功发布，隐藏点赞数、关闭评论功能、开启Facebook分享",
+      "verification": {
+        "type": "post_created",
+        "hide_likes": true,
+        "commenting_off": true,
+        "share_facebook": true
+      }
+    },
+    {
+      "id": 38,
+      "instruction": "进入 个人主页 > 编辑资料，将Name修改为'New Name'，将Bio修改为'Hello World'，将Username修改为'newuser'，然后关闭编辑页面并验证个人主页显示更新后的信息",
+      "difficulty": "expert",
+      "category": "profile_edit",
+      "expected_result": "个人主页显示更新后的名称'New Name'、简介'Hello World'和用户名'newuser'",
+      "verification": {
+        "type": "multi_field_check",
+        "fields": {
+          "name": "New Name",
+          "bio": "Hello World",
+          "username": "newuser"
+        }
+      }
+    },
+    {
+      "id": 39,
+      "instruction": "在 设置 > Blocked 中拉黑一个用户，然后从首页动态进入该用户的个人主页验证其内容受限，最后回到 设置 > Blocked 解除拉黑",
+      "difficulty": "expert",
+      "category": "complex_workflow",
+      "expected_result": "用户被成功拉黑，其内容显示受限，最终成功解除拉黑",
+      "verification": {
+        "type": "workflow_complete",
+        "steps": ["block_user", "verify_restricted", "unblock_user"]
+      }
+    },
+    {
+      "id": 40,
+      "instruction": "完成以下操作序列：1) 给第一条帖子点赞并收藏，2) 打开评论区发布评论'Great post!'，3) 点击帖子作者的用户名进入其个人主页，4) 关注该作者，5) 返回首页验证关注按钮已变为'Following'",
+      "difficulty": "expert",
+      "category": "complex_workflow",
+      "expected_result": "帖子已点赞并收藏，评论已发布，作者已关注，首页动态显示'Following'状态",
+      "verification": {
+        "type": "workflow_complete",
+        "steps": ["like_post", "save_post", "add_comment", "view_profile", "follow_user", "verify_following"]
+      }
+    }
+  ]
+}
