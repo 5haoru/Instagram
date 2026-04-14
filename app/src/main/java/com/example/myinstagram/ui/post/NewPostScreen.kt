@@ -1,6 +1,7 @@
 package com.example.myinstagram.ui.post
 
 import androidx.compose.runtime.*
+import com.example.myinstagram.presenter.CreateMode
 import com.example.myinstagram.presenter.NewPostPresenter
 import com.example.myinstagram.presenter.NewPostStep
 
@@ -26,7 +27,8 @@ fun NewPostScreen(
             onBack = { presenter.currentStep = NewPostStep.GALLERY },
             onShare = {
                 presenter.sharePost()
-                onShowToast("Post shared!")
+                val msg = if (presenter.createMode == CreateMode.REEL) "Reel shared!" else "Post shared!"
+                onShowToast(msg)
                 presenter.resetDraft()
                 onBack()
             }

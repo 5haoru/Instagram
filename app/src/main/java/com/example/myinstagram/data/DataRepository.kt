@@ -15,6 +15,7 @@ object DataRepository {
     private var conversations: MutableList<Conversation> = mutableListOf()
     private var music: MutableList<MusicTrack> = mutableListOf()
     private var locations: MutableList<LocationItem> = mutableListOf()
+    private var hiddenPostIds: MutableSet<String> = mutableSetOf()
     private var isLoaded = false
 
     fun initialize(context: Context) {
@@ -27,6 +28,7 @@ object DataRepository {
         music = loadList(context, "data/music.json")
         locations = loadList(context, "data/locations.json")
         isLoaded = true
+        AutoTestExporter.init(context)
     }
 
     private inline fun <reified T> loadList(context: Context, path: String): MutableList<T> {
@@ -41,7 +43,7 @@ object DataRepository {
 
     fun getUserById(userId: String): User? = users.find { it.userId == userId }
 
-    fun getPosts(): List<Post> = posts
+    fun getPosts(): List<Post> = posts.filter { it.postId !in hiddenPostIds }
 
     fun getStories(): List<Story> = stories
 
@@ -59,6 +61,13 @@ object DataRepository {
         if (idx >= 0) {
             users[idx] = users[idx].copy(postsCount = users[idx].postsCount + 1)
         }
+        AutoTestExporter.exportPostsState()
+        AutoTestExporter.exportUserState()
+    }
+
+    fun addReel(reel: Reel) {
+        reels.add(0, reel)
+        AutoTestExporter.exportReelsState()
     }
 
     fun getSuggestedUsers(): List<User> {
@@ -73,6 +82,7 @@ object DataRepository {
         val newLikedBy = post.likedBy.toMutableList()
         if (userId in newLikedBy) newLikedBy.remove(userId) else newLikedBy.add(userId)
         posts[idx] = post.copy(likedBy = newLikedBy)
+        AutoTestExporter.exportPostsState()
     }
 
     fun toggleSavePost(postId: String, userId: String) {
@@ -82,6 +92,7 @@ object DataRepository {
         val newSavedBy = post.savedBy.toMutableList()
         if (userId in newSavedBy) newSavedBy.remove(userId) else newSavedBy.add(userId)
         posts[idx] = post.copy(savedBy = newSavedBy)
+        AutoTestExporter.exportPostsState()
     }
 
     fun addCommentToPost(postId: String, comment: Comment) {
@@ -89,6 +100,7 @@ object DataRepository {
         if (idx < 0) return
         val post = posts[idx]
         posts[idx] = post.copy(comments = post.comments + comment)
+        AutoTestExporter.exportPostsState()
     }
 
     fun toggleLikeComment(postId: String, commentId: String, userId: String) {
@@ -112,6 +124,7 @@ object DataRepository {
         val newLikedBy = reel.likedBy.toMutableList()
         if (userId in newLikedBy) newLikedBy.remove(userId) else newLikedBy.add(userId)
         reels[idx] = reel.copy(likedBy = newLikedBy)
+        AutoTestExporter.exportReelsState()
     }
 
     fun toggleSaveReel(reelId: String, userId: String) {
@@ -121,6 +134,7 @@ object DataRepository {
         val newSavedBy = reel.savedBy.toMutableList()
         if (userId in newSavedBy) newSavedBy.remove(userId) else newSavedBy.add(userId)
         reels[idx] = reel.copy(savedBy = newSavedBy)
+        AutoTestExporter.exportReelsState()
     }
 
     fun addCommentToReel(reelId: String, comment: Comment) {
@@ -128,6 +142,7 @@ object DataRepository {
         if (idx < 0) return
         val reel = reels[idx]
         reels[idx] = reel.copy(comments = reel.comments + comment)
+        AutoTestExporter.exportReelsState()
     }
 
     fun toggleLikeReelComment(reelId: String, commentId: String, userId: String) {
@@ -149,6 +164,7 @@ object DataRepository {
         if (idx < 0) return
         val conv = conversations[idx]
         conversations[idx] = conv.copy(messages = conv.messages + message)
+        AutoTestExporter.exportConversationsState()
     }
 
     fun markStoryViewed(storyId: String, userId: String) {
@@ -186,6 +202,7 @@ object DataRepository {
             followers = newFollowers,
             followersCount = newFollowers.size
         )
+        AutoTestExporter.exportUserState()
     }
 
     fun getSavedPosts(userId: String): List<Post> {
@@ -200,6 +217,7 @@ object DataRepository {
         val idx = users.indexOfFirst { it.userId == userId }
         if (idx < 0) return
         users[idx] = users[idx].copy(isPrivate = !users[idx].isPrivate)
+        AutoTestExporter.exportUserState()
     }
 
     fun toggleCloseFriend(currentUserId: String, targetUserId: String) {
@@ -209,6 +227,7 @@ object DataRepository {
         val newList = user.closeFriends.toMutableList()
         if (targetUserId in newList) newList.remove(targetUserId) else newList.add(targetUserId)
         users[idx] = user.copy(closeFriends = newList)
+        AutoTestExporter.exportUserState()
     }
 
     fun toggleBlockUser(currentUserId: String, targetUserId: String) {
@@ -218,5 +237,22 @@ object DataRepository {
         val newList = user.blockedUsers.toMutableList()
         if (targetUserId in newList) newList.remove(targetUserId) else newList.add(targetUserId)
         users[idx] = user.copy(blockedUsers = newList)
+        AutoTestExporter.exportUserState()
+    }
+
+    fun hidePost(postId: String) {
+        hiddenPostIds.add(postId)
+    }
+
+    fun updateUserProfile(userId: String, displayName: String? = null, username: String? = null, bio: String? = null, gender: String? = null) {
+        val idx = users.indexOfFirst { it.userId == userId }
+        if (idx < 0) return
+        val user = users[idx]
+        users[idx] = user.copy(
+            displayName = displayName ?: user.displayName,
+            username = username ?: user.username,
+            bio = bio ?: user.bio
+        )
+        AutoTestExporter.exportUserState()
     }
 }

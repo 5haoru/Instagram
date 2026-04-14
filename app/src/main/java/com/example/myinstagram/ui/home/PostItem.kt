@@ -52,6 +52,7 @@ fun PostItem(
     onLikeClick: () -> Unit,
     onSaveClick: () -> Unit,
     onFollowClick: () -> Unit,
+    onHidePost: () -> Unit,
     onAvatarClick: (String) -> Unit,
     onAddComment: (String) -> Unit,
     onToggleLikeComment: (String) -> Unit,
@@ -62,6 +63,20 @@ fun PostItem(
     var showShareSheet by remember { mutableStateOf(false) }
     var showMenuSheet by remember { mutableStateOf(false) }
     var showCommentSheet by remember { mutableStateOf(false) }
+    var showNotInterestedDialog by remember { mutableStateOf(false) }
+
+    if (showNotInterestedDialog) {
+        AlertDialog(
+            onDismissRequest = { showNotInterestedDialog = false },
+            title = { Text("Not interested") },
+            text = { Text("Post marked as not interested and hidden successfully!") },
+            confirmButton = {
+                TextButton(onClick = { showNotInterestedDialog = false }) {
+                    Text("OK")
+                }
+            }
+        )
+    }
 
     Column(modifier = Modifier.fillMaxWidth()) {
         // Post Header
@@ -233,13 +248,13 @@ fun PostItem(
         }
 
         // Likes count
-        if (post.likedBy.isNotEmpty()) {
+        if (post.likesCount > 0) {
             Text(
-                text = "${formatCount(post.likedBy.size)} likes",
+                text = "${formatCount(post.likesCount)} likes",
                 color = InstagramWhite,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 13.sp,
-                modifier = Modifier.padding(horizontal = 14.dp)
+                modifier = Modifier.padding(horizontal = 14.dp, vertical = 2.dp)
             )
         }
 
@@ -296,6 +311,10 @@ fun PostItem(
         MenuBottomSheet(
             isFollowing = isFollowing,
             onUnfollow = { onFollowClick() },
+            onNotInterested = {
+                onHidePost()
+                showNotInterestedDialog = true
+            },
             onDismiss = { showMenuSheet = false }
         )
     }

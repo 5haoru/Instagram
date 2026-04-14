@@ -3,19 +3,21 @@
     "postId": "post_1",
     "userId": "user_anushka",
     "imageUrl": "image/1.jpeg",
-    "caption": "Hichki toh aati hai har kisi ko... 🌅✨ #blessed #gratitude",
+    "caption": "Hichki toh aati hai har kisi ko... #blessed #gratitude",
     "location": "Mumbai, India",
     "timestamp": "2 days ago",
-    "likedBy": ["user_self", "user_naina", "user_tanu", "user_yashi", "user_deepak"],
-    "savedBy": ["user_self", "user_naina"],
+    "likesCount": 1247,
+    "sharesCount": 23,
+    "likedBy": [],
+    "savedBy": [],
     "comments": [
       {
         "commentId": "comment_1",
         "postId": "post_1",
         "userId": "user_naina",
-        "text": "So beautiful! 😍",
+        "text": "So beautiful!",
         "timestamp": "2 days ago",
-        "likedBy": ["user_anushka"]
+        "likedBy": []
       },
       {
         "commentId": "comment_2",
@@ -31,19 +33,21 @@
     "postId": "post_2",
     "userId": "user_naina",
     "imageUrl": "image/2.jpeg",
-    "caption": "Weekend brunch vibes 🍳☕ #foodie #brunch",
+    "caption": "Weekend brunch vibes #foodie #brunch",
     "location": "Cafe Latte, Delhi",
     "timestamp": "5 hours ago",
-    "likedBy": ["user_self", "user_tanu", "user_yashi"],
-    "savedBy": ["user_yashi"],
+    "likesCount": 892,
+    "sharesCount": 15,
+    "likedBy": [],
+    "savedBy": [],
     "comments": [
       {
         "commentId": "comment_3",
         "postId": "post_2",
         "userId": "user_yashi",
-        "text": "Looks delicious! Where is this? 🤤",
+        "text": "Looks delicious! Where is this?",
         "timestamp": "4 hours ago",
-        "likedBy": ["user_naina"]
+        "likedBy": []
       }
     ]
   },
@@ -51,25 +55,27 @@
     "postId": "post_3",
     "userId": "user_yashi",
     "imageUrl": "image/3.jpeg",
-    "caption": "Lost in the mountains 🏔️ #wanderlust #travel #nature",
+    "caption": "Lost in the mountains #wanderlust #travel #nature",
     "location": "Manali, Himachal Pradesh",
     "timestamp": "1 day ago",
-    "likedBy": ["user_self", "user_naina", "user_tanu", "user_deepak", "user_sakshi"],
-    "savedBy": ["user_self", "user_tanu"],
+    "likesCount": 2156,
+    "sharesCount": 47,
+    "likedBy": [],
+    "savedBy": [],
     "comments": [
       {
         "commentId": "comment_4",
         "postId": "post_3",
         "userId": "user_tanu",
-        "text": "Take me there! 😭",
+        "text": "Take me there!",
         "timestamp": "1 day ago",
-        "likedBy": ["user_yashi", "user_naina"]
+        "likedBy": []
       },
       {
         "commentId": "comment_5",
         "postId": "post_3",
         "userId": "user_deepak",
-        "text": "Incredible view 🔥",
+        "text": "Incredible view",
         "timestamp": "23 hours ago",
         "likedBy": []
       },
@@ -79,7 +85,7 @@
         "userId": "user_sakshi",
         "text": "Adding to my bucket list!",
         "timestamp": "20 hours ago",
-        "likedBy": ["user_yashi"]
+        "likedBy": []
       }
     ]
   },
@@ -87,18 +93,20 @@
     "postId": "post_4",
     "userId": "user_sakshi",
     "imageUrl": "image/4.jpeg",
-    "caption": "New outfit who dis 👗✨ #fashion #ootd #style",
+    "caption": "New outfit who dis #fashion #ootd #style",
     "timestamp": "3 days ago",
-    "likedBy": ["user_yashi", "user_tanu", "user_naina"],
-    "savedBy": ["user_tanu"],
+    "likesCount": 1534,
+    "sharesCount": 31,
+    "likedBy": [],
+    "savedBy": [],
     "comments": [
       {
         "commentId": "comment_7",
         "postId": "post_4",
         "userId": "user_tanu",
-        "text": "Stunning! 🔥🔥",
+        "text": "Stunning!",
         "timestamp": "3 days ago",
-        "likedBy": ["user_sakshi"]
+        "likedBy": []
       }
     ]
   },
@@ -106,19 +114,21 @@
     "postId": "post_5",
     "userId": "user_sangram",
     "imageUrl": "image/5.jpeg",
-    "caption": "No shortcuts, only hard work 💪🔥 #fitness #motivation #gym",
+    "caption": "No shortcuts, only hard work #fitness #motivation #gym",
     "location": "Gold's Gym, Mumbai",
     "timestamp": "6 hours ago",
-    "likedBy": ["user_self", "user_tanu", "user_deepak"],
-    "savedBy": ["user_self"],
+    "likesCount": 3421,
+    "sharesCount": 68,
+    "likedBy": [],
+    "savedBy": [],
     "comments": [
       {
         "commentId": "comment_8",
         "postId": "post_5",
         "userId": "user_deepak",
-        "text": "Beast mode! 💪",
+        "text": "Beast mode!",
         "timestamp": "5 hours ago",
-        "likedBy": ["user_sangram"]
+        "likedBy": []
       }
     ]
   }

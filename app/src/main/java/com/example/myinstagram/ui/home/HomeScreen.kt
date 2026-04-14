@@ -85,6 +85,7 @@ fun HomeScreen(
                 onLikeClick = { presenter.toggleLikePost(post.postId) },
                 onSaveClick = { presenter.toggleSavePost(post.postId) },
                 onFollowClick = { presenter.toggleFollowUser(post.userId) },
+                onHidePost = { presenter.hidePost(post.postId) },
                 onAvatarClick = onNavigateToUserProfile,
                 onAddComment = { text -> presenter.addCommentToPost(post.postId, text) },
                 onToggleLikeComment = { commentId -> presenter.toggleLikeComment(post.postId, commentId) },

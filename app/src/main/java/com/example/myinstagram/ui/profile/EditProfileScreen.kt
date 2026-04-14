@@ -38,7 +38,10 @@ fun EditProfileScreen(
                 .padding(horizontal = 8.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = onBack) {
+            IconButton(onClick = {
+                presenter.saveProfile()
+                onBack()
+            }) {
                 Icon(
                     Icons.Filled.Close,
                     contentDescription = "Close",

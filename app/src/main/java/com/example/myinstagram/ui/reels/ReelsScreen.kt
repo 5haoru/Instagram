@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 import com.example.myinstagram.model.Reel
@@ -48,13 +49,14 @@ import com.example.myinstagram.ui.components.UserAvatar
 import com.example.myinstagram.ui.theme.*
 import com.example.myinstagram.ui.theme.Color_White
 
+@OptIn(UnstableApi::class)
 @Composable
-fun ReelsScreen(presenter: ReelsPresenter, modifier: Modifier = Modifier) {
+fun ReelsScreen(presenter: ReelsPresenter, modifier: Modifier = Modifier, initialPage: Int = 0) {
     LaunchedEffect(Unit) { presenter.loadData() }
 
     if (presenter.reels.isEmpty()) return
 
-    val pagerState = rememberPagerState(pageCount = { presenter.reels.size })
+    val pagerState = rememberPagerState(initialPage = initialPage.coerceIn(0, presenter.reels.size - 1), pageCount = { presenter.reels.size })
 
     Box(modifier = modifier.fillMaxSize().background(Color.Black)) {
         VerticalPager(state = pagerState, modifier = Modifier.fillMaxSize()) { page ->
@@ -134,6 +136,7 @@ private fun ReelItem(
         MenuBottomSheet(
             isFollowing = isFollowing,
             onUnfollow = { user?.userId?.let { presenter.toggleFollowUser(it) } },
+            onNotInterested = { /* Reels don't support hide for now */ },
             onDismiss = { showMenu = false }
         )
     }
@@ -201,7 +204,7 @@ private fun ReelItem(
                         .clickable { presenter.toggleLikeReel(reel.reelId) }
                 )
                 Text(
-                    text = formatCount(reel.likedBy.size),
+                    text = formatCount(reel.likesCount),
                     color = Color_White,
                     fontSize = 12.sp
                 )
@@ -233,7 +236,7 @@ private fun ReelItem(
                         .clickable { showShare = true }
                 )
                 Text(
-                    text = formatCount(reel.shareCount),
+                    text = formatCount(reel.sharesCount),
                     color = Color_White,
                     fontSize = 12.sp
                 )

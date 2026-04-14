@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//f/AppSimV2/android_template/android_template/app/src/main/java/com/example/myspotify/**)",
+      "Read(//f/AppSimV2/android_template/android_template/app/src/main/**)"
+    ]
+  }
+}

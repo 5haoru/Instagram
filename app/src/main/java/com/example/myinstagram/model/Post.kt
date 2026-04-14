@@ -7,6 +7,8 @@ data class Post(
     val caption: String = "",
     val location: String? = null,
     val timestamp: String = "",
+    val likesCount: Int = 0,
+    val sharesCount: Int = 0,
     val likedBy: List<String> = emptyList(),
     val savedBy: List<String> = emptyList(),
     val comments: List<Comment> = emptyList()

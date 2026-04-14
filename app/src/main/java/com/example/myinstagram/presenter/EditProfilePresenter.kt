@@ -26,4 +26,15 @@ class EditProfilePresenter {
             bio = user.bio
         }
     }
+
+    fun saveProfile() {
+        val userId = currentUser?.userId ?: return
+        DataRepository.updateUserProfile(
+            userId = userId,
+            displayName = name,
+            username = username,
+            bio = bio
+        )
+        currentUser = DataRepository.getCurrentUser()
+    }
 }

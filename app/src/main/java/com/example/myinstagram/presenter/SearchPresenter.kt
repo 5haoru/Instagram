@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.example.myinstagram.data.DataRepository
 import com.example.myinstagram.model.Post
+import com.example.myinstagram.model.Reel
 import com.example.myinstagram.model.User
 
 class SearchPresenter {
@@ -14,6 +15,10 @@ class SearchPresenter {
     var searchQuery by mutableStateOf("")
         private set
     var searchResults by mutableStateOf<List<User>>(emptyList())
+        private set
+    var searchPostResults by mutableStateOf<List<Post>>(emptyList())
+        private set
+    var searchReelResults by mutableStateOf<List<Reel>>(emptyList())
         private set
     var isSearching by mutableStateOf(false)
         private set
@@ -26,12 +31,33 @@ class SearchPresenter {
         searchQuery = query
         isSearching = query.isNotEmpty()
         if (query.isNotEmpty()) {
-            searchResults = DataRepository.getUsers().filter {
+            val matchedUsers = DataRepository.getUsers().filter {
                 it.username.contains(query, ignoreCase = true) ||
                     it.displayName.contains(query, ignoreCase = true)
             }
+            val matchedPosts = DataRepository.getPosts().filter {
+                it.caption.contains(query, ignoreCase = true) ||
+                    (it.location?.contains(query, ignoreCase = true) == true)
+            }
+            val matchedReels = DataRepository.getReels().filter {
+                it.caption.contains(query, ignoreCase = true) ||
+                    it.audioName.contains(query, ignoreCase = true)
+            }
+
+            // If no exact matches found, show all content as recommendations
+            if (matchedUsers.isEmpty() && matchedPosts.isEmpty() && matchedReels.isEmpty()) {
+                searchResults = DataRepository.getUsers().filter { !it.isCurrentUser }
+                searchPostResults = DataRepository.getPosts()
+                searchReelResults = DataRepository.getReels()
+            } else {
+                searchResults = matchedUsers
+                searchPostResults = matchedPosts
+                searchReelResults = matchedReels
+            }
         } else {
             searchResults = emptyList()
+            searchPostResults = emptyList()
+            searchReelResults = emptyList()
         }
     }
 }

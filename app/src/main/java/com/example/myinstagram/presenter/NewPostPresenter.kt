@@ -5,10 +5,12 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.example.myinstagram.data.AutoTestExporter
 import com.example.myinstagram.data.DataRepository
 import com.example.myinstagram.model.LocationItem
 import com.example.myinstagram.model.MusicTrack
 import com.example.myinstagram.model.Post
+import com.example.myinstagram.model.Reel
 import com.example.myinstagram.model.User
 
 enum class NewPostStep {
@@ -21,6 +23,12 @@ enum class AudienceType(val label: String) {
     FOLLOWERS_EXCEPT("Followers Except...")
 }
 
+enum class CreateMode(val label: String) {
+    POST("Post"),
+    REEL("Reel"),
+    LIVE("Live")
+}
+
 class NewPostPresenter {
 
     var currentUser by mutableStateOf<User?>(null)
@@ -29,12 +37,22 @@ class NewPostPresenter {
     // Navigation
     var currentStep by mutableStateOf(NewPostStep.GALLERY)
 
-    // Gallery
+    // Create mode
+    var createMode by mutableStateOf(CreateMode.POST)
+
+    // Gallery (images for post)
     val availableImages: List<String> = (1..10).map { "image/$it.jpeg" }
     var selectedImageIndex by mutableIntStateOf(0)
         private set
     val selectedImage: String
         get() = availableImages[selectedImageIndex]
+
+    // Videos (for reel)
+    val availableVideos: List<String> = (1..5).map { "reels/$it.mp4" }
+    var selectedVideoIndex by mutableIntStateOf(0)
+        private set
+    val selectedVideo: String
+        get() = availableVideos[selectedVideoIndex]
 
     // Caption
     var caption by mutableStateOf("")
@@ -80,6 +98,12 @@ class NewPostPresenter {
         }
     }
 
+    fun selectVideo(index: Int) {
+        if (index in availableVideos.indices) {
+            selectedVideoIndex = index
+        }
+    }
+
     fun onNextFromGallery() {
         currentStep = NewPostStep.DRAFT
     }
@@ -119,8 +143,13 @@ class NewPostPresenter {
 
     fun sharePost() {
         val userId = currentUser?.userId ?: return
+        if (createMode == CreateMode.REEL) {
+            shareReel()
+            return
+        }
+        val postId = "post_${System.currentTimeMillis()}"
         val post = Post(
-            postId = "post_${System.currentTimeMillis()}",
+            postId = postId,
             userId = userId,
             imageUrl = selectedImage,
             caption = caption,
@@ -128,11 +157,49 @@ class NewPostPresenter {
             timestamp = "Just now"
         )
         DataRepository.addPost(post)
+        AutoTestExporter.exportNewPostEvent(
+            postId = postId,
+            caption = caption,
+            location = selectedLocation?.name,
+            hashtags = hashtags.toList(),
+            musicTitle = selectedMusic?.title,
+            audience = selectedAudience.label,
+            shareToFacebook = shareToFacebook,
+            hideLikesAndViews = hideLikesAndViews,
+            turnOffComments = turnOffComments,
+            isReel = false
+        )
+    }
+
+    private fun shareReel() {
+        val userId = currentUser?.userId ?: return
+        val reelId = "reel_${System.currentTimeMillis()}"
+        val reel = Reel(
+            reelId = reelId,
+            userId = userId,
+            videoUrl = selectedVideo,
+            caption = caption,
+            audioName = selectedMusic?.title ?: "Original audio"
+        )
+        DataRepository.addReel(reel)
+        AutoTestExporter.exportNewPostEvent(
+            postId = reelId,
+            caption = caption,
+            location = null,
+            hashtags = hashtags.toList(),
+            musicTitle = selectedMusic?.title,
+            audience = selectedAudience.label,
+            shareToFacebook = shareToFacebook,
+            hideLikesAndViews = hideLikesAndViews,
+            turnOffComments = turnOffComments,
+            isReel = true
+        )
     }
 
     fun resetDraft() {
         currentStep = NewPostStep.GALLERY
         selectedImageIndex = 0
+        selectedVideoIndex = 0
         caption = ""
         voteQuestion = ""
         voteOptions.clear()

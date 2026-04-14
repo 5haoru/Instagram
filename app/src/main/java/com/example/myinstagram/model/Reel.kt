@@ -6,8 +6,9 @@ data class Reel(
     val videoUrl: String = "",
     val caption: String = "",
     val audioName: String = "",
+    val likesCount: Int = 0,
+    val sharesCount: Int = 0,
     val likedBy: List<String> = emptyList(),
     val savedBy: List<String> = emptyList(),
-    val comments: List<Comment> = emptyList(),
-    val shareCount: Int = 0
+    val comments: List<Comment> = emptyList()
 )

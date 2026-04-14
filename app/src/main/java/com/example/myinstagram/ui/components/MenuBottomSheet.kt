@@ -28,6 +28,7 @@ import com.example.myinstagram.ui.theme.*
 fun MenuBottomSheet(
     isFollowing: Boolean,
     onUnfollow: () -> Unit,
+    onNotInterested: () -> Unit,
     onDismiss: () -> Unit
 ) {
     ModalBottomSheet(
@@ -56,7 +57,10 @@ fun MenuBottomSheet(
             MenuItem(
                 icon = Icons.Filled.VisibilityOff,
                 label = "Not interested",
-                onClick = onDismiss
+                onClick = {
+                    onNotInterested()
+                    onDismiss()
+                }
             )
             if (isFollowing) {
                 MenuItem(

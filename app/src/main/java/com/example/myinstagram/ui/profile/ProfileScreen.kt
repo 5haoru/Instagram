@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.GridOn
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.PersonPin
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.VideoLibrary
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -40,6 +41,7 @@ fun ProfileScreen(
     onMenuClick: () -> Unit = {},
     onNavigateToFollowers: () -> Unit,
     onNavigateToFollowing: () -> Unit,
+    onReelClick: (Int) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     LaunchedEffect(Unit) { presenter.loadData() }
@@ -191,7 +193,7 @@ fun ProfileScreen(
         // Content based on selected tab
         when (selectedContentTab) {
             0 -> PostsGrid(presenter.userPosts)
-            1 -> ReelsGrid()
+            1 -> ReelsGrid(onReelClick = onReelClick)
             2 -> {
                 // Tagged tab - empty state
                 Box(
@@ -240,10 +242,11 @@ private fun PostsGrid(posts: List<Post>) {
 }
 
 @Composable
-private fun ReelsGrid() {
-    val reels = DataRepository.getReels()
-    // Show reels by current user, plus some others
-    val displayReels = reels
+private fun ReelsGrid(onReelClick: (Int) -> Unit = {}) {
+    val currentUser = DataRepository.getCurrentUser()
+    val allReels = DataRepository.getReels()
+    // Show only reels by the current user
+    val displayReels = allReels.filter { it.userId == currentUser?.userId }
 
     if (displayReels.isEmpty()) {
         Box(
@@ -266,15 +269,34 @@ private fun ReelsGrid() {
         verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
         items(displayReels) { reel ->
+            val context = LocalContext.current
+            // Find the index of this reel in the full reels list
+            val reelIndexInAll = allReels.indexOf(reel)
             Box(
                 modifier = Modifier
                     .aspectRatio(9f / 16f)
-                    .background(Color(0xFF1A1A2E)),
+                    .background(Color(0xFF1A1A2E))
+                    .clickable { onReelClick(reelIndexInAll) },
                 contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = "\uD83C\uDFAC",
-                    fontSize = 24.sp
+                // Use first frame of video as thumbnail by loading with coil
+                Image(
+                    painter = rememberAsyncImagePainter(
+                        ImageRequest.Builder(context)
+                            .data("file:///android_asset/${reel.videoUrl}")
+                            .crossfade(true)
+                            .build()
+                    ),
+                    contentDescription = "Reel",
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+                // Play icon overlay
+                Icon(
+                    Icons.Filled.PlayArrow,
+                    contentDescription = null,
+                    tint = Color_White.copy(alpha = 0.8f),
+                    modifier = Modifier.size(36.dp)
                 )
                 // View count at bottom
                 Text(

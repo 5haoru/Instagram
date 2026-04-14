@@ -85,4 +85,9 @@ class HomePresenter {
     fun isPostSaved(post: Post): Boolean {
         return currentUser?.userId in post.savedBy
     }
+
+    fun hidePost(postId: String) {
+        DataRepository.hidePost(postId)
+        posts = DataRepository.getPosts()
+    }
 }

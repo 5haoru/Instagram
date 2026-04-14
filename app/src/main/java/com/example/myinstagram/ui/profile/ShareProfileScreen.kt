@@ -29,6 +29,20 @@ fun ShareProfileScreen(
     modifier: Modifier = Modifier
 ) {
     val user = presenter.currentUser ?: return
+    var showSuccessDialog by remember { mutableStateOf(false) }
+
+    if (showSuccessDialog) {
+        AlertDialog(
+            onDismissRequest = { showSuccessDialog = false },
+            title = { Text("Shared successfully") },
+            text = { Text("Profile shared successfully!") },
+            confirmButton = {
+                TextButton(onClick = { showSuccessDialog = false }) {
+                    Text("OK")
+                }
+            }
+        )
+    }
 
     Column(
         modifier = modifier
@@ -105,15 +119,18 @@ fun ShareProfileScreen(
         ) {
             ShareProfileOption(
                 icon = Icons.Filled.Share,
-                label = "Share profile"
+                label = "Share profile",
+                onClick = { showSuccessDialog = true }
             )
             ShareProfileOption(
                 icon = Icons.Filled.QrCode2,
-                label = "QR code"
+                label = "QR code",
+                onClick = { showSuccessDialog = true }
             )
             ShareProfileOption(
                 icon = Icons.Filled.ContentCopy,
-                label = "Copy link"
+                label = "Copy link",
+                onClick = { showSuccessDialog = true }
             )
         }
 
@@ -132,17 +149,18 @@ fun ShareProfileScreen(
 @Composable
 private fun ShareProfileOption(
     icon: androidx.compose.ui.graphics.vector.ImageVector,
-    label: String
+    label: String,
+    onClick: () -> Unit = {}
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(8.dp)
     ) {
-        Box(
+        IconButton(
+            onClick = onClick,
             modifier = Modifier
                 .size(52.dp)
-                .background(InstagramMediumGray, RoundedCornerShape(50)),
-            contentAlignment = Alignment.Center
+                .background(InstagramMediumGray, RoundedCornerShape(50))
         ) {
             Icon(
                 icon,

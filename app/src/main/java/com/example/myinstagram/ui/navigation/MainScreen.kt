@@ -2,10 +2,13 @@ package com.example.myinstagram.ui.navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
@@ -77,6 +80,7 @@ fun MainScreen() {
     var followersFollowingInitialTab by remember { mutableIntStateOf(0) }
     var chatConversationId by remember { mutableStateOf<String?>(null) }
     var showSettings by remember { mutableStateOf(false) }
+    var viewingReelIndex by remember { mutableStateOf<Int?>(null) }
 
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
@@ -185,6 +189,30 @@ fun MainScreen() {
         return
     }
 
+    if (viewingReelIndex != null) {
+        val viewReelPresenter = remember { ReelsPresenter() }
+        Box(modifier = Modifier.fillMaxSize()) {
+            ReelsScreen(
+                presenter = viewReelPresenter,
+                initialPage = viewingReelIndex!!
+            )
+            // Back button overlay
+            androidx.compose.material3.IconButton(
+                onClick = { viewingReelIndex = null },
+                modifier = Modifier
+                    .statusBarsPadding()
+                    .padding(4.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Back",
+                    tint = Color_White
+                )
+            }
+        }
+        return
+    }
+
     Scaffold(
         containerColor = InstagramBlack,
         snackbarHost = {
@@ -262,6 +290,7 @@ fun MainScreen() {
                     followersFollowingInitialTab = 1
                     showFollowersFollowing = true
                 },
+                onReelClick = { reelIndex -> viewingReelIndex = reelIndex },
                 modifier = modifier
             )
         }

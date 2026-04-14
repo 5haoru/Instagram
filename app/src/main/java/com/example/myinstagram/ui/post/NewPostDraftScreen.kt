@@ -30,6 +30,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.example.myinstagram.presenter.CreateMode
 import com.example.myinstagram.presenter.NewPostPresenter
 import com.example.myinstagram.presenter.NewPostStep
 import com.example.myinstagram.ui.components.UserAvatar
@@ -94,7 +95,7 @@ fun NewPostDraftScreen(
                 )
             }
             Text(
-                text = "New post",
+                text = if (presenter.createMode == CreateMode.REEL) "New reel" else "New post",
                 color = InstagramWhite,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
@@ -116,21 +117,49 @@ fun NewPostDraftScreen(
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
         ) {
-            // Image preview
-            Image(
-                painter = rememberAsyncImagePainter(
-                    ImageRequest.Builder(context)
-                        .data("file:///android_asset/${presenter.selectedImage}")
-                        .crossfade(true)
-                        .build()
-                ),
-                contentDescription = "Post image",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f)
-                    .clickable { showFullscreenImage = true },
-                contentScale = ContentScale.Crop
-            )
+            // Media preview
+            if (presenter.createMode == CreateMode.REEL) {
+                // Video preview placeholder
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(9f / 16f)
+                        .background(androidx.compose.ui.graphics.Color(0xFF1A1A2E))
+                        .clickable { showFullscreenImage = true },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Icon(
+                            Icons.Outlined.MusicNote,
+                            contentDescription = "Video",
+                            tint = androidx.compose.ui.graphics.Color.White,
+                            modifier = Modifier.size(48.dp)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = presenter.selectedVideo,
+                            color = InstagramTextGray,
+                            fontSize = 14.sp
+                        )
+                    }
+                }
+            } else {
+                // Image preview
+                Image(
+                    painter = rememberAsyncImagePainter(
+                        ImageRequest.Builder(context)
+                            .data("file:///android_asset/${presenter.selectedImage}")
+                            .crossfade(true)
+                            .build()
+                    ),
+                    contentDescription = "Post image",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(1f)
+                        .clickable { showFullscreenImage = true },
+                    contentScale = ContentScale.Crop
+                )
+            }
 
             // Caption input
             Row(

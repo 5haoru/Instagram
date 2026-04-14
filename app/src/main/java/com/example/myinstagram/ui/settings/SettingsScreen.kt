@@ -65,6 +65,77 @@ private fun SettingsMainPage(
     onBack: () -> Unit,
     onNavigate: (String) -> Unit
 ) {
+    var showLogoutDialog by remember { mutableStateOf(false) }
+    var isLoggedOut by remember { mutableStateOf(false) }
+
+    // Logout confirmation dialog
+    if (showLogoutDialog) {
+        AlertDialog(
+            onDismissRequest = { showLogoutDialog = false },
+            title = {
+                Text("Log out", color = InstagramWhite, fontWeight = FontWeight.Bold)
+            },
+            text = {
+                Text(
+                    "Are you sure you want to log out of your account?",
+                    color = InstagramTextGray
+                )
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    showLogoutDialog = false
+                    isLoggedOut = true
+                }) {
+                    Text("Log out", color = InstagramLikeRed, fontWeight = FontWeight.Bold)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showLogoutDialog = false }) {
+                    Text("Cancel", color = InstagramWhite)
+                }
+            },
+            containerColor = InstagramMediumGray,
+            shape = RoundedCornerShape(16.dp)
+        )
+    }
+
+    // Logged out state
+    if (isLoggedOut) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(InstagramBlack)
+                .statusBarsPadding(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "Instagram",
+                color = InstagramWhite,
+                fontSize = 36.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.height(24.dp))
+            Text(
+                text = "You have been logged out",
+                color = InstagramTextGray,
+                fontSize = 16.sp
+            )
+            Spacer(modifier = Modifier.height(32.dp))
+            Button(
+                onClick = { isLoggedOut = false },
+                colors = ButtonDefaults.buttonColors(containerColor = InstagramBlue),
+                shape = RoundedCornerShape(8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 48.dp)
+            ) {
+                Text("Log in", color = InstagramWhite, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+            }
+        }
+        return
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -295,7 +366,7 @@ private fun SettingsMainPage(
                 color = InstagramLikeRed,
                 fontSize = 15.sp,
                 modifier = Modifier
-                    .clickable { }
+                    .clickable { showLogoutDialog = true }
                     .padding(horizontal = 20.dp, vertical = 12.dp)
             )
 
