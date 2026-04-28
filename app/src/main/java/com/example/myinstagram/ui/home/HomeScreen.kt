@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.myinstagram.data.DataRepository
 import com.example.myinstagram.model.Story
 import com.example.myinstagram.model.User
 import com.example.myinstagram.presenter.HomePresenter
@@ -42,6 +43,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier
 ) {
     LaunchedEffect(Unit) { presenter.loadData() }
+    LaunchedEffect(DataRepository.contentVersion) { presenter.loadData() }
 
     LazyColumn(
         modifier = modifier

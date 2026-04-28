@@ -3,6 +3,7 @@ package com.example.myinstagram.presenter
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.example.myinstagram.data.AutoTestExporter
 import com.example.myinstagram.data.DataRepository
 import com.example.myinstagram.model.Post
 import com.example.myinstagram.model.Reel
@@ -54,10 +55,24 @@ class SearchPresenter {
                 searchPostResults = matchedPosts
                 searchReelResults = matchedReels
             }
+            AutoTestExporter.exportSearchState(
+                query = query,
+                userResultsCount = searchResults.size,
+                postResultsCount = searchPostResults.size,
+                reelResultsCount = searchReelResults.size,
+                isSearching = isSearching
+            )
         } else {
             searchResults = emptyList()
             searchPostResults = emptyList()
             searchReelResults = emptyList()
+            AutoTestExporter.exportSearchState(
+                query = query,
+                userResultsCount = 0,
+                postResultsCount = 0,
+                reelResultsCount = 0,
+                isSearching = false
+            )
         }
     }
 }

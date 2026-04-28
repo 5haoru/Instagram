@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.filled.Repeat
 import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material.icons.outlined.Send
 import androidx.compose.material3.Icon
@@ -39,6 +40,7 @@ import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
+import com.example.myinstagram.data.DataRepository
 import com.example.myinstagram.model.Reel
 import com.example.myinstagram.model.User
 import com.example.myinstagram.presenter.ReelsPresenter
@@ -51,8 +53,14 @@ import com.example.myinstagram.ui.theme.Color_White
 
 @OptIn(UnstableApi::class)
 @Composable
-fun ReelsScreen(presenter: ReelsPresenter, modifier: Modifier = Modifier, initialPage: Int = 0) {
+fun ReelsScreen(
+    presenter: ReelsPresenter,
+    modifier: Modifier = Modifier,
+    initialPage: Int = 0,
+    onShowToast: (String) -> Unit = {}
+) {
     LaunchedEffect(Unit) { presenter.loadData() }
+    LaunchedEffect(DataRepository.contentVersion) { presenter.loadData() }
 
     if (presenter.reels.isEmpty()) return
 
@@ -66,7 +74,8 @@ fun ReelsScreen(presenter: ReelsPresenter, modifier: Modifier = Modifier, initia
                 reel = reel,
                 user = user,
                 presenter = presenter,
-                isCurrentPage = pagerState.currentPage == page
+                isCurrentPage = pagerState.currentPage == page,
+                onShowToast = onShowToast
             )
         }
 
@@ -99,7 +108,8 @@ private fun ReelItem(
     reel: Reel,
     user: User?,
     presenter: ReelsPresenter,
-    isCurrentPage: Boolean
+    isCurrentPage: Boolean,
+    onShowToast: (String) -> Unit
 ) {
     val context = LocalContext.current
     val isLiked = presenter.isReelLiked(reel)
@@ -126,7 +136,11 @@ private fun ReelItem(
     if (showShare) {
         ShareBottomSheet(
             users = presenter.getUsers().filter { !it.isCurrentUser },
-            onDismiss = { showShare = false }
+            onDismiss = { showShare = false },
+            onShareToUser = { user ->
+                showShare = false
+                onShowToast("Successfully shared to ${user.username}")
+            }
         )
     }
 
@@ -204,7 +218,7 @@ private fun ReelItem(
                         .clickable { presenter.toggleLikeReel(reel.reelId) }
                 )
                 Text(
-                    text = formatCount(reel.likesCount),
+                    text = formatCount(reel.likesCount + reel.likedBy.size),
                     color = Color_White,
                     fontSize = 12.sp
                 )
@@ -241,6 +255,15 @@ private fun ReelItem(
                     fontSize = 12.sp
                 )
             }
+            // Repost
+            Icon(
+                Icons.Filled.Repeat,
+                contentDescription = "Repost",
+                tint = Color_White,
+                modifier = Modifier
+                    .size(28.dp)
+                    .clickable { onShowToast("Reposted") }
+            )
             // Save
             Icon(
                 if (isSaved) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
@@ -248,7 +271,10 @@ private fun ReelItem(
                 tint = Color_White,
                 modifier = Modifier
                     .size(28.dp)
-                    .clickable { presenter.toggleSaveReel(reel.reelId) }
+                    .clickable {
+                        presenter.toggleSaveReel(reel.reelId)
+                        onShowToast(if (!isSaved) "Saved" else "Removed from saved")
+                    }
             )
             // Menu
             Icon(

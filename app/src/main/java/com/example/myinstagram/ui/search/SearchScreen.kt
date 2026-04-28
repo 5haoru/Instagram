@@ -73,6 +73,16 @@ fun SearchScreen(presenter: SearchPresenter, modifier: Modifier = Modifier) {
         if (presenter.isSearching) {
             // Search Results - users, posts and reels
             LazyColumn {
+                item {
+                    Text(
+                        text = "Search results for \"${presenter.searchQuery}\"",
+                        color = InstagramWhite,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                    )
+                }
+
                 // Users section
                 if (presenter.searchResults.isNotEmpty()) {
                     item {

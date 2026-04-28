@@ -194,7 +194,8 @@ fun MainScreen() {
         Box(modifier = Modifier.fillMaxSize()) {
             ReelsScreen(
                 presenter = viewReelPresenter,
-                initialPage = viewingReelIndex!!
+                initialPage = viewingReelIndex!!,
+                onShowToast = showToast
             )
             // Back button overlay
             androidx.compose.material3.IconButton(
@@ -275,7 +276,11 @@ fun MainScreen() {
                 modifier = modifier
             )
             1 -> SearchScreen(searchPresenter, modifier)
-            2 -> ReelsScreen(reelsPresenter, Modifier.padding(bottom = innerPadding.calculateBottomPadding()))
+            2 -> ReelsScreen(
+                presenter = reelsPresenter,
+                modifier = Modifier.padding(bottom = innerPadding.calculateBottomPadding()),
+                onShowToast = showToast
+            )
             3 -> MessagesScreen(messagesPresenter, onOpenChat = { chatConversationId = it }, modifier)
             4 -> ProfileScreen(
                 presenter = profilePresenter,

@@ -131,5 +131,27 @@
         "likedBy": []
       }
     ]
+  },
+  {
+    "postId": "post_happy_1",
+    "userId": "user_naina",
+    "imageUrl": "image/6.jpeg",
+    "caption": "Feeling happy today with sunshine and good friends #happy #joy",
+    "location": "Delhi, India",
+    "timestamp": "1 hour ago",
+    "likesCount": 456,
+    "sharesCount": 8,
+    "likedBy": [],
+    "savedBy": [],
+    "comments": [
+      {
+        "commentId": "comment_happy_1",
+        "postId": "post_happy_1",
+        "userId": "user_yashi",
+        "text": "This happy vibe is contagious!",
+        "timestamp": "45 minutes ago",
+        "likedBy": []
+      }
+    ]
   }
 ]

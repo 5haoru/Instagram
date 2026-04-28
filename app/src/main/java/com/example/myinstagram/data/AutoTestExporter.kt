@@ -126,6 +126,25 @@ object AutoTestExporter {
         writeJson("conversations_state.json", data)
     }
 
+    /** Export search state for automated validation */
+    fun exportSearchState(
+        query: String,
+        userResultsCount: Int,
+        postResultsCount: Int,
+        reelResultsCount: Int,
+        isSearching: Boolean
+    ) {
+        val data = mapOf(
+            "query" to query,
+            "isSearching" to isSearching,
+            "userResultsCount" to userResultsCount,
+            "postResultsCount" to postResultsCount,
+            "reelResultsCount" to reelResultsCount,
+            "totalResultsCount" to (userResultsCount + postResultsCount + reelResultsCount)
+        )
+        writeJson("search_state.json", data)
+    }
+
     /** Record a new post creation event with all its settings */
     fun exportNewPostEvent(
         postId: String,

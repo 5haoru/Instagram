@@ -31,7 +31,8 @@ import com.example.myinstagram.ui.theme.*
 @Composable
 fun ShareBottomSheet(
     users: List<User>,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    onShareToUser: (User) -> Unit = {}
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -82,7 +83,9 @@ fun ShareBottomSheet(
                 items(users) { user ->
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.width(64.dp)
+                        modifier = Modifier
+                            .width(64.dp)
+                            .clickable { onShareToUser(user) }
                     ) {
                         UserAvatar(
                             username = user.username,

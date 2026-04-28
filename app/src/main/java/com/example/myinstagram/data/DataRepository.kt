@@ -1,11 +1,21 @@
 package com.example.myinstagram.data
 
 import android.content.Context
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.setValue
 import com.example.myinstagram.model.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 object DataRepository {
+
+    var contentVersion by mutableIntStateOf(0)
+        private set
+
+    private fun notifyContentChanged() {
+        contentVersion++
+    }
 
     private val gson = Gson()
     private var users: MutableList<User> = mutableListOf()
@@ -83,6 +93,7 @@ object DataRepository {
         if (userId in newLikedBy) newLikedBy.remove(userId) else newLikedBy.add(userId)
         posts[idx] = post.copy(likedBy = newLikedBy)
         AutoTestExporter.exportPostsState()
+        notifyContentChanged()
     }
 
     fun toggleSavePost(postId: String, userId: String) {
@@ -93,6 +104,7 @@ object DataRepository {
         if (userId in newSavedBy) newSavedBy.remove(userId) else newSavedBy.add(userId)
         posts[idx] = post.copy(savedBy = newSavedBy)
         AutoTestExporter.exportPostsState()
+        notifyContentChanged()
     }
 
     fun addCommentToPost(postId: String, comment: Comment) {
@@ -101,6 +113,7 @@ object DataRepository {
         val post = posts[idx]
         posts[idx] = post.copy(comments = post.comments + comment)
         AutoTestExporter.exportPostsState()
+        notifyContentChanged()
     }
 
     fun toggleLikeComment(postId: String, commentId: String, userId: String) {
@@ -115,6 +128,7 @@ object DataRepository {
             } else comment
         }
         posts[postIdx] = post.copy(comments = newComments)
+        notifyContentChanged()
     }
 
     fun toggleLikeReel(reelId: String, userId: String) {
@@ -125,6 +139,7 @@ object DataRepository {
         if (userId in newLikedBy) newLikedBy.remove(userId) else newLikedBy.add(userId)
         reels[idx] = reel.copy(likedBy = newLikedBy)
         AutoTestExporter.exportReelsState()
+        notifyContentChanged()
     }
 
     fun toggleSaveReel(reelId: String, userId: String) {
@@ -135,6 +150,7 @@ object DataRepository {
         if (userId in newSavedBy) newSavedBy.remove(userId) else newSavedBy.add(userId)
         reels[idx] = reel.copy(savedBy = newSavedBy)
         AutoTestExporter.exportReelsState()
+        notifyContentChanged()
     }
 
     fun addCommentToReel(reelId: String, comment: Comment) {
@@ -143,6 +159,7 @@ object DataRepository {
         val reel = reels[idx]
         reels[idx] = reel.copy(comments = reel.comments + comment)
         AutoTestExporter.exportReelsState()
+        notifyContentChanged()
     }
 
     fun toggleLikeReelComment(reelId: String, commentId: String, userId: String) {
@@ -157,6 +174,7 @@ object DataRepository {
             } else comment
         }
         reels[reelIdx] = reel.copy(comments = newComments)
+        notifyContentChanged()
     }
 
     fun addMessage(conversationId: String, message: Message) {

@@ -107,7 +107,15 @@ fun NewPostDraftScreen(
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier
-                    .clickable { onShare() }
+                    .clickable {
+                        // Save any pending hashtag input before sharing
+                        val trimmedInput = hashtagInput.trim()
+                        if (trimmedInput.isNotEmpty()) {
+                            presenter.addHashtag(trimmedInput)
+                            hashtagInput = ""
+                        }
+                        onShare()
+                    }
                     .padding(horizontal = 12.dp)
             )
         }
@@ -229,10 +237,19 @@ fun NewPostDraftScreen(
                 TextField(
                     value = hashtagInput,
                     onValueChange = { input ->
+                        // Check if input ends with space or newline
                         if (input.endsWith(" ") || input.endsWith("\n")) {
-                            val tag = input.trim()
-                            if (tag.isNotEmpty()) {
-                                presenter.addHashtag(tag)
+                            val trimmedInput = input.trim()
+                            if (trimmedInput.isNotEmpty()) {
+                                // Remove '#' prefix if present
+                                val tag = if (trimmedInput.startsWith("#")) {
+                                    trimmedInput.substring(1)
+                                } else {
+                                    trimmedInput
+                                }
+                                if (tag.isNotEmpty()) {
+                                    presenter.addHashtag(tag)
+                                }
                             }
                             hashtagInput = ""
                         } else {

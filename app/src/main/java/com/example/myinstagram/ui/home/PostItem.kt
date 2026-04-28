@@ -248,9 +248,10 @@ fun PostItem(
         }
 
         // Likes count
-        if (post.likesCount > 0) {
+        val displayLikesCount = post.likesCount + post.likedBy.size
+        if (displayLikesCount > 0) {
             Text(
-                text = "${formatCount(post.likesCount)} likes",
+                text = "${formatCount(displayLikesCount)} likes",
                 color = InstagramWhite,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 13.sp,
@@ -302,7 +303,11 @@ fun PostItem(
     if (showShareSheet) {
         ShareBottomSheet(
             users = allUsers.filter { !it.isCurrentUser },
-            onDismiss = { showShareSheet = false }
+            onDismiss = { showShareSheet = false },
+            onShareToUser = { user ->
+                showShareSheet = false
+                onShowToast("Successfully shared to ${user.username}")
+            }
         )
     }
 

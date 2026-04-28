@@ -17,7 +17,7 @@ class MessagesPresenter {
 
     fun loadData() {
         currentUser = DataRepository.getCurrentUser()
-        conversations = DataRepository.getConversations()
+        conversations = sortConversationsByRecentMessage(DataRepository.getConversations())
     }
 
     fun getUserById(userId: String): User? = DataRepository.getUserById(userId)
@@ -42,6 +42,28 @@ class MessagesPresenter {
             isRead = true
         )
         DataRepository.addMessage(conversationId, msg)
-        conversations = DataRepository.getConversations()
+        conversations = sortConversationsByRecentMessage(DataRepository.getConversations())
+    }
+
+    private fun sortConversationsByRecentMessage(items: List<Conversation>): List<Conversation> {
+        return items.sortedBy { conversation ->
+            timestampRank(conversation.messages.lastOrNull()?.timestamp)
+        }
+    }
+
+    private fun timestampRank(timestamp: String?): Int {
+        val value = timestamp?.trim()?.lowercase() ?: return Int.MAX_VALUE
+        if (value == "just now" || value == "now") return 0
+
+        val amount = value.substringBefore(" ").toIntOrNull() ?: return Int.MAX_VALUE
+        return when {
+            "minute" in value -> amount
+            "hour" in value -> amount * 60
+            "day" in value -> amount * 60 * 24
+            "week" in value -> amount * 60 * 24 * 7
+            "month" in value -> amount * 60 * 24 * 30
+            "year" in value -> amount * 60 * 24 * 365
+            else -> Int.MAX_VALUE
+        }
     }
 }
