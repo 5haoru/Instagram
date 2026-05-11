@@ -116,6 +116,17 @@ object DataRepository {
         notifyContentChanged()
     }
 
+    fun repostPost(postId: String, userId: String) {
+        val idx = posts.indexOfFirst { it.postId == postId }
+        if (idx < 0) return
+        val post = posts[idx]
+        val newRepostedBy = (post.repostedBy ?: emptyList()).toMutableList()
+        if (userId !in newRepostedBy) newRepostedBy.add(userId)
+        posts[idx] = post.copy(repostedBy = newRepostedBy)
+        AutoTestExporter.exportPostsState()
+        notifyContentChanged()
+    }
+
     fun toggleLikeComment(postId: String, commentId: String, userId: String) {
         val postIdx = posts.indexOfFirst { it.postId == postId }
         if (postIdx < 0) return
@@ -220,6 +231,7 @@ object DataRepository {
             followers = newFollowers,
             followersCount = newFollowers.size
         )
+        notifyContentChanged()
         AutoTestExporter.exportUserState()
     }
 
@@ -269,8 +281,17 @@ object DataRepository {
         users[idx] = user.copy(
             displayName = displayName ?: user.displayName,
             username = username ?: user.username,
-            bio = bio ?: user.bio
+            bio = bio ?: user.bio,
+            gender = gender ?: user.gender
         )
+        AutoTestExporter.exportUserState()
+    }
+
+    fun toggleSleepMode(userId: String) {
+        val idx = users.indexOfFirst { it.userId == userId }
+        if (idx < 0) return
+        val currentSleep = users[idx].sleepMode ?: false
+        users[idx] = users[idx].copy(sleepMode = !currentSleep)
         AutoTestExporter.exportUserState()
     }
 }

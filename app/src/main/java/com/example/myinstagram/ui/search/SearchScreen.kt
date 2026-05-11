@@ -2,6 +2,7 @@ package com.example.myinstagram.ui.search
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -36,7 +37,7 @@ import com.example.myinstagram.ui.components.UserAvatar
 import com.example.myinstagram.ui.theme.*
 
 @Composable
-fun SearchScreen(presenter: SearchPresenter, modifier: Modifier = Modifier) {
+fun SearchScreen(presenter: SearchPresenter, onPostClick: (String) -> Unit = {}, modifier: Modifier = Modifier) {
     LaunchedEffect(Unit) { presenter.loadData() }
 
     Column(
@@ -132,7 +133,7 @@ fun SearchScreen(presenter: SearchPresenter, modifier: Modifier = Modifier) {
                         )
                     }
                     items(presenter.searchPostResults) { post ->
-                        SearchPostItem(post)
+                        SearchPostItem(post, onPostClick = { onPostClick(post.postId) })
                     }
                 }
 
@@ -206,13 +207,14 @@ fun SearchScreen(presenter: SearchPresenter, modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun SearchPostItem(post: Post) {
+private fun SearchPostItem(post: Post, onPostClick: () -> Unit = {}) {
     val context = LocalContext.current
     val user = DataRepository.getUserById(post.userId)
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable { onPostClick() }
             .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

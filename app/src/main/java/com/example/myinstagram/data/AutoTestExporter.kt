@@ -36,15 +36,17 @@ object AutoTestExporter {
         exportConversationsState()
     }
 
-    /** Export current user state: privacy, following, followers, closeFriends, blockedUsers, displayName, etc. */
+    /** Export current user state: privacy, following, followers, closeFriends, blockedUsers, displayName, gender, sleepMode, etc. */
     fun exportUserState() {
         val currentUser = DataRepository.getCurrentUser() ?: return
-        val data = mapOf(
+        val data = mapOf<String, Any?>(
             "userId" to currentUser.userId,
             "username" to currentUser.username,
             "displayName" to currentUser.displayName,
             "bio" to currentUser.bio,
             "isPrivate" to currentUser.isPrivate,
+            "gender" to (currentUser.gender ?: ""),
+            "sleepMode" to (currentUser.sleepMode ?: false),
             "followersCount" to currentUser.followersCount,
             "followingCount" to currentUser.followingCount,
             "followers" to currentUser.followers,
@@ -56,11 +58,11 @@ object AutoTestExporter {
         writeJson("user_state.json", data)
     }
 
-    /** Export posts state: likedBy, savedBy, comments for each post */
+    /** Export posts state: likedBy, savedBy, repostedBy, comments for each post */
     fun exportPostsState() {
         val posts = DataRepository.getPosts()
         val data = posts.map { post ->
-            mapOf(
+            mapOf<String, Any?>(
                 "postId" to post.postId,
                 "userId" to post.userId,
                 "caption" to post.caption,
@@ -68,6 +70,7 @@ object AutoTestExporter {
                 "imageUrl" to post.imageUrl,
                 "likedBy" to post.likedBy,
                 "savedBy" to post.savedBy,
+                "repostedBy" to (post.repostedBy ?: emptyList<String>()),
                 "commentsCount" to post.comments.size,
                 "comments" to post.comments.map { c ->
                     mapOf(

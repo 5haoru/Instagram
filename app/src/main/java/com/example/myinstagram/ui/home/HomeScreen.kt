@@ -93,6 +93,7 @@ fun HomeScreen(
                 onToggleLikeComment = { commentId -> presenter.toggleLikeComment(post.postId, commentId) },
                 isCommentLiked = { comment -> presenter.isCommentLiked(comment) },
                 getUserById = { presenter.getUserById(it) },
+                onRepostClick = { presenter.repostPost(post.postId) },
                 onShowToast = onShowToast
             )
         }

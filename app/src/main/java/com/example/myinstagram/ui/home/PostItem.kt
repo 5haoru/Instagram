@@ -58,6 +58,7 @@ fun PostItem(
     onToggleLikeComment: (String) -> Unit,
     isCommentLiked: (Comment) -> Boolean,
     getUserById: (String) -> User?,
+    onRepostClick: () -> Unit,
     onShowToast: (String) -> Unit
 ) {
     var showShareSheet by remember { mutableStateOf(false) }
@@ -230,7 +231,10 @@ fun PostItem(
                 tint = InstagramWhite,
                 modifier = Modifier
                     .size(24.dp)
-                    .clickable { onShowToast("Reposted") }
+                    .clickable {
+                        onRepostClick()
+                        onShowToast("Reposted")
+                    }
             )
             Spacer(modifier = Modifier.weight(1f))
             // Save/Bookmark

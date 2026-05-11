@@ -24,6 +24,7 @@ class EditProfilePresenter {
             name = user.displayName
             username = user.username
             bio = user.bio
+            gender = user.gender ?: ""
         }
     }
 
@@ -33,7 +34,8 @@ class EditProfilePresenter {
             userId = userId,
             displayName = name,
             username = username,
-            bio = bio
+            bio = bio,
+            gender = gender
         )
         currentUser = DataRepository.getCurrentUser()
     }

@@ -90,4 +90,10 @@ class HomePresenter {
         DataRepository.hidePost(postId)
         posts = DataRepository.getPosts()
     }
+
+    fun repostPost(postId: String) {
+        val userId = currentUser?.userId ?: return
+        DataRepository.repostPost(postId, userId)
+        posts = DataRepository.getPosts()
+    }
 }

@@ -185,7 +185,7 @@ class NewPostPresenter {
         AutoTestExporter.exportNewPostEvent(
             postId = reelId,
             caption = caption,
-            location = null,
+            location = selectedLocation?.name,
             hashtags = hashtags.toList(),
             musicTitle = selectedMusic?.title,
             audience = selectedAudience.label,

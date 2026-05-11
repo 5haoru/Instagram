@@ -8,6 +8,8 @@ data class User(
     val avatarUrl: String = "",
     val isVerified: Boolean = false,
     val isPrivate: Boolean = false,
+    val gender: String? = null,
+    val sleepMode: Boolean? = null,
     val postsCount: Int = 0,
     val followersCount: Int = 0,
     val followingCount: Int = 0,

@@ -81,6 +81,7 @@ fun MainScreen() {
     var chatConversationId by remember { mutableStateOf<String?>(null) }
     var showSettings by remember { mutableStateOf(false) }
     var viewingReelIndex by remember { mutableStateOf<Int?>(null) }
+    var viewingPostId by remember { mutableStateOf<String?>(null) }
 
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
@@ -214,6 +215,17 @@ fun MainScreen() {
         return
     }
 
+    if (viewingPostId != null) {
+        PostDetailScreen(
+            postId = viewingPostId!!,
+            homePresenter = homePresenter,
+            onBack = { viewingPostId = null },
+            onNavigateToUserProfile = { userId -> viewingPostId = null; viewingUserId = userId },
+            onShowToast = showToast
+        )
+        return
+    }
+
     Scaffold(
         containerColor = InstagramBlack,
         snackbarHost = {
@@ -275,7 +287,7 @@ fun MainScreen() {
                 onNavigateToNewPost = { showNewPost = true },
                 modifier = modifier
             )
-            1 -> SearchScreen(searchPresenter, modifier)
+            1 -> SearchScreen(searchPresenter, onPostClick = { postId -> viewingPostId = postId }, modifier)
             2 -> ReelsScreen(
                 presenter = reelsPresenter,
                 modifier = Modifier.padding(bottom = innerPadding.calculateBottomPadding()),

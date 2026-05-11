@@ -15,15 +15,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.myinstagram.data.DataRepository
 import com.example.myinstagram.ui.theme.*
 
 @Composable
 fun TimeManagementScreen(
     onBack: () -> Unit
 ) {
+    val currentUser = DataRepository.getCurrentUser()
     var dailyLimit by remember { mutableStateOf(false) }
     var dailyLimitMinutes by remember { mutableStateOf(60f) }
-    var sleepMode by remember { mutableStateOf(false) }
+    var sleepMode by remember { mutableStateOf(currentUser?.sleepMode == true) }
 
     // Mock usage data (minutes per day for the last 7 days)
     val weeklyUsage = remember { listOf(45, 62, 38, 71, 55, 48, 60) }
@@ -170,7 +172,10 @@ fun TimeManagementScreen(
                 }
                 Switch(
                     checked = sleepMode,
-                    onCheckedChange = { sleepMode = it },
+                    onCheckedChange = {
+                        sleepMode = it
+                        currentUser?.userId?.let { uid -> DataRepository.toggleSleepMode(uid) }
+                    },
                     colors = SwitchDefaults.colors(
                         checkedThumbColor = InstagramBlack,
                         checkedTrackColor = InstagramBlue,
